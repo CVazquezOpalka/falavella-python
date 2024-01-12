@@ -1,36 +1,38 @@
 {% extends 'store/layouts/main.html' %} {% block content %}
 <div class="py-3 bg-primary">
   <div class="container">
-    <a class="text-white" href="{% url 'home' %}">Home / </a>
-    <a class="text-white" href="{% url 'collections' %}">Collections /</a>
-    <a class="text-white" href="{% url 'collectionsview' category.slug %}">{{category.name}}</a>
+    <a class="text-white" style="text-transform: capitalize;" href="{% url 'home' %}">Home / </a>
+    <a class="text-white" style="text-transform: capitalize;" href="{% url 'collections' %}">Collections /</a>
+    <a class="text-white" style="text-transform: capitalize;" href="{% url 'collectionsview' category.slug %}">{{category.name}}</a>
   </div>
 </div>
 
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>{{category.name}}</h1>
+      <h1 style="text-transform: capitalize;">{{category.name}}</h1>
       <hr />
       <div class="row">
         {% for item in products %}
         <div class="col-md-3">
-          <div class="card">
+          <div class="card mb-3">
             <a href="{% url 'productview' item.category.slug item.slug %}">
               <div class="card-body">
                 <div class="category-image">
                   <img
-                    class="w-100"
+                  class="w-100 object-fit-contain"
                     src="{{item.product_image.url}}"
                     alt="category image"
+                    
+                    height="200px"
                   />
                 </div>
                 <h4>{{item.name}}</h4>
                 <span class="float-start"
-                  >{{item.original_price | stringformat:"d"}}</span
+                  >$ {{item.original_price | stringformat:"d"}}</span
                 >
                 <span class="float-end"
-                  >{{item.selling_price | stringformat:"d"}}</span
+                  >${{item.selling_price | stringformat:"d"}}</span
                 >
               </div>
             </a>

@@ -21,11 +21,9 @@ $(document).ready(function () {
   });
   $(".addToCartBtn").click(function (e) {
     e.preventDefault();
-    console.log("estoy hacendo click");
     var product_id = $(this).closest(".product_data").find(".prod_id").val();
     var prod_qty = $(this).closest(".product_data").find(".qty-input").val();
     var token = $("input[name=csrfmiddlewaretoken]").val();
-    console.log(prod_qty)
     $.ajax({
       method: "POST",
       url: "/add-to-cart",
@@ -35,7 +33,6 @@ $(document).ready(function () {
         csrfmiddlewaretoken: token,
       },
       success: function (response) {
-        console.log(response);
         alertify.success(response.status);
       },
     });
