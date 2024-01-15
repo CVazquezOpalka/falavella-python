@@ -1,6 +1,6 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
-from store.controller import authview, cart, wishlist, checkout
+from store.controller import authview, cart, wishlist, checkout, order
 
 
 urlpatterns = [
@@ -24,4 +24,8 @@ urlpatterns = [
     path("delete-to-wishlist", wishlist.delete_to_wishlist, name="deletetowishlist"),
     path("checkout", checkout.index, name="checkout"),
     path("place-order", checkout.placeorder, name="placeorder"),
+    path("my-order", order.index, name="myorder"),
+    path('view-order/<str:t_no>', order.view, name="orderview")
+    
+    
 ]
