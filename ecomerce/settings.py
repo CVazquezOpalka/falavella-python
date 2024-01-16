@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", default="your secret key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = "RENDER" not in os.environ
 
 ALLOWED_HOSTS = []
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
@@ -71,7 +71,11 @@ WSGI_APPLICATION = "ecomerce.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": dj_database_url.config()
+    "default": dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default="postgresql://postgres:postgres@localhost:5432/ecomerce/ecomerce",
+        conn_max_age=600,
+    )
 }
 
 
