@@ -1,5 +1,100 @@
-{% extends 'store/layouts/main.html' %} {% block content %}
-
+{% extends 'store/layouts/main.html' %} 
+{% block content %} 
 {% include 'store/inc/slider.html' %}
-<h1>Hello world</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text-center mt-5">Trending products</h3>
+      <hr />
+      <div class="row owl-carousel owl-theme">
+       
+       {% for item in product %}
+        <div class="item p-3">
+          <div class="card">
+            <a href="{% url 'productview' item.category.slug item.slug %}">
+              <div class="card-body">
+                <div class="category-image">
+                  <img
+                  class="w-100 object-fit-contain"
+                    src="{{item.product_image.url}}"
+                    alt="category image"
+                    
+                    height="200px"
+                  />
+                </div>
+                <h4 class="text-center">{{item.name}}</h4>
+                <span class="float-start"
+                  >$ {{item.selling_price | stringformat:"d"}}</span
+                >
+                
+                {% if item.quantity > 0 %}
+                <span class=" float-end badge bg-success">In stock</span>
+                {% else %}
+                <span class=" float-end badge bg-danger">Out stock</span>
+                {% endif %}
+                  
+              </div>
+            </a>
+          </div>
+        </div>
+       {% endfor %}
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock content %}
+
+{% block scripts %}
+<script>
+  $('.owl-carousel').owlCarousel({
+    loop:true,
+    dots:false,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:4
+        }
+    }
+})
+</script>
+  
+{% endblock scripts %}
+  
+<!-- <div class="col-md-3">
+          <div class="card mb-3">
+            <a href="{% url 'productview' item.category.slug item.slug %}">
+              <div class="card-body">
+                <div class="category-image">
+                  <img
+                  class="w-100 object-fit-contain"
+                    src="{{item.product_image.url}}"
+                    alt="category image"
+                    
+                    height="200px"
+                  />
+                </div>
+                <h4>{{item.name}}</h4>
+                <span class="float-start"
+                  >$ {{item.selling_price | stringformat:"d"}}</span
+                >
+                
+                {% if item.quantity > 0 %}
+                <span class=" float-end badge bg-success">In stock</span>
+                {% else %}
+                <span class=" float-end badge bg-danger">Out stock</span>
+                {% endif %}
+                  
+              </div>
+            </a>
+          </div>
+        </div> -->

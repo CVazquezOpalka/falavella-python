@@ -12,6 +12,8 @@ urlpatterns = [
         views.productview,
         name="productview",
     ),
+    path("product-list", views.product_list),
+    path("searchproduct", views.searchproduct, name="searchproduct"),
     path("register/", authview.register, name="register"),
     path("login/", authview.loginpage, name="login"),
     path("logout/", authview.signout, name="logout"),
@@ -25,7 +27,5 @@ urlpatterns = [
     path("checkout", checkout.index, name="checkout"),
     path("place-order", checkout.placeorder, name="placeorder"),
     path("my-order", order.index, name="myorder"),
-    path('view-order/<str:t_no>', order.view, name="orderview")
-    
-    
+    path("view-order/<str:t_no>", order.view, name="orderview"),
 ]

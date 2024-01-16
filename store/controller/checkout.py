@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from store.models import Cart, Order, OrderItems, Product, Profile
 from django.contrib.auth.models import User
+import random
 
 
 @login_required(login_url="login")

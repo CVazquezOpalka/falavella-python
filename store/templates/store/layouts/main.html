@@ -5,7 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %} {% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <!-- Static links -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}" />
     <!-- BOOTSTRAP -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -27,9 +30,18 @@
       rel="stylesheet"
       href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
     <style>
       a {
-        text-decoration: none;
+        text-decoration: none !important;
+        color:black
+      }
+      a:hover{
+        color: blue !important;
       }
       .product-viewtag {
         background-color: red;
@@ -40,6 +52,7 @@
         text-align: center;
         text-transform: uppercase;
         top: 22px;
+        right: 22px;
         margin-left: 17.5rem;
         padding: 7px 10px;
         font-weight: 600;
@@ -51,7 +64,26 @@
     {% include 'store/inc/navbar.html' %} {% block content %} {% endblock %}
     <!-- SCRIPTS && JQUERY -->
     <script src="{% static '/js/jquery-3.7.1.min.js' %}"></script>
+
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+      var availableTags = [];
+      $.ajax({
+        method: "GET",
+        url: "/product-list",
+        success: function (response) {
+          availableTags = response;
+          startAutoComplete(response);
+        },
+      });
+      function startAutoComplete(availableTags) {
+        $("#searchproducts").autocomplete({
+          source: availableTags,
+        });
+      }
+    </script>
     <script src="{% static '/js/custom.js' %}"></script>
+    <script src="{% static '/js/owl.carousel.min.js' %}"></script>
     <!-- BOOTSTRAP -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -66,6 +98,21 @@
         alertify.success("{{ msg }}");
       {% endfor %}
     </script>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+      var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+      (function () {
+        var s1 = document.createElement("script"),
+          s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = "https://embed.tawk.to/65a672a40ff6374032c0dc29/1hk92vkmf";
+        s1.charset = "UTF-8";
+        s1.setAttribute("crossorigin", "*");
+        s0.parentNode.insertBefore(s1, s0);
+      })();
+    </script>
+    <!--End of Tawk.to Script-->
     {% block scripts %} {% endblock %}
   </body>
 </html>

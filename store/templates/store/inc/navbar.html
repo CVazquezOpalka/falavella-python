@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">E-Shop</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -12,6 +12,32 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+    <!-- Searchbar -->
+    <form
+      action="{% url 'searchproduct' %}"
+      method="POST"
+      style="width: 40% !important; margin-left: 5% !important"
+    >
+      {% csrf_token %}
+      <div id="search">
+        <div class="input-group">
+          <input
+            required
+            type="search"
+            id="searchproducts"
+            class="form-control"
+            name="productsearch"
+            placeholder="Search Product..."
+            aria-label="Recipient's username"
+            aria-describedby="basic-addon2"
+          />
+          <button type="submit" class="input-group-text">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+    <!-- end searchbar -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
@@ -58,7 +84,9 @@
             {{request.user}}
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'myorder' %}">my Orders</a></li>
+            <li>
+              <a class="dropdown-item" href="{% url 'myorder' %}">My Orders</a>
+            </li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider" /></li>
             <li>
